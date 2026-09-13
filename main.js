@@ -23,6 +23,7 @@
       id: "puente-samala",
       category: "puentes",
       categoryLabel: "Puentes",
+      code: "L-04.1",
       name: "Puente Samalá",
       location: "San Cristóbal Totonicapán",
       cover: "armado y formaleteado de pilotes.png",
@@ -55,7 +56,8 @@
     {
       id: "taludes",
       category: "taludes",
-      categoryLabel: "Estabilización de taludes",
+      categoryLabel: "Taludes",
+      code: "L-04.2",
       name: "Estabilización, protección de taludes y control de riesgos",
       location: null,
       cover: "muros y proteccion de talud.png",
@@ -77,6 +79,7 @@
       id: "puente-salcaja",
       category: "puentes",
       categoryLabel: "Puentes",
+      code: "L-04.3",
       name: "Puente Salcajá – Cuatro Caminos",
       location: null,
       cover: "demolicion puente salcaja- cuatro caminos.png",
@@ -105,6 +108,7 @@
       id: "arada",
       category: "vial",
       categoryLabel: "Obra vial",
+      code: "L-04.4",
       name: "Mejoramiento calle de ingreso San José la Arada",
       location: "Chiquimula",
       cover: "mejoramiento calle de ingreso San Jose la Arada.png",
@@ -123,6 +127,7 @@
       id: "mantenimiento",
       category: "vial",
       categoryLabel: "Obra vial",
+      code: "L-04.5",
       name: "Mantenimiento de carreteras no pavimentadas",
       location: null,
       cover: "mantenimiento de carreteras no pavimentadas.png",
@@ -154,6 +159,7 @@
       card.innerHTML =
         '<span class="thumb">' +
         '<img src="' + src(p.cover) + '" alt="' + p.name + '" loading="lazy" width="640" height="480">' +
+        '<span class="code-tag">' + p.code + "</span>" +
         '<span class="tag">' + p.categoryLabel + "</span>" +
         "</span>" +
         "<h3>" + p.name + "</h3>" +
@@ -181,7 +187,7 @@
     modalBody.innerHTML =
       '<div class="modal-gallery">' + galleryHtml + "</div>" +
       '<div class="modal-body">' +
-      '<span class="eyebrow">' + p.categoryLabel + "</span>" +
+      '<span class="sheet-tag">' + p.code + " — " + p.categoryLabel + "</span>" +
       "<h3>" + p.name + "</h3>" +
       (p.location ? '<p class="meta">' + p.location + "</p>" : "") +
       "<p>" + p.description + "</p>" +
@@ -222,13 +228,22 @@
 
   renderCards();
 
+  // Navegación móvil
   const header = document.getElementById("site-header");
   const navToggle = document.getElementById("nav-toggle");
   navToggle.addEventListener("click", () => {
     const isOpen = header.classList.toggle("nav-open");
     navToggle.setAttribute("aria-expanded", String(isOpen));
+    navToggle.setAttribute("aria-label", isOpen ? "Cerrar menú" : "Abrir menú");
   });
   document.querySelectorAll(".main-nav a").forEach((link) => {
-    link.addEventListener("click", () => header.classList.remove("nav-open"));
+    link.addEventListener("click", () => {
+      header.classList.remove("nav-open");
+      navToggle.setAttribute("aria-expanded", "false");
+    });
   });
+
+  // Año dinámico en el footer
+  const yearEl = document.getElementById("footer-year");
+  if (yearEl) yearEl.textContent = new Date().getFullYear();
 })();
