@@ -4,20 +4,17 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SERIMA | Grupo Técnico en Construcción</title>
-<meta name="description" content="SERIMA — Grupo Técnico en Construcción Selma, S.A. Empresa especializada en construcción civil y vial con experiencia desde 2011. Puentes, estabilización de taludes y obra vial en Guatemala.">
+<meta name="description" content="SERIMA — Grupo Técnico en Construcción Selma, S.A. Construcción civil y vial en Guatemala desde 2011. Puentes, estabilización de taludes y obra vial.">
 <link rel="canonical" href="https://serimagt.com/">
-<!-- Nota: serimagt.com es el dominio que planeas comprar. Si al final compras uno distinto, reemplaza esta URL (y las de abajo) por la definitiva. -->
 
-<!-- Open Graph -->
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="SERIMA">
 <meta property="og:title" content="SERIMA | Grupo Técnico en Construcción">
-<meta property="og:description" content="Empresa especializada en construcción civil y vial con experiencia desde 2011. Conoce nuestros proyectos de puentes, taludes y obra vial.">
+<meta property="og:description" content="Construcción civil y vial en Guatemala desde 2011. Conoce nuestros proyectos de puentes, taludes y obra vial.">
 <meta property="og:url" content="https://serimagt.com/">
 <meta property="og:image" content="https://serimagt.com/recursos/LOGO%20SERIMA.jpeg">
 <meta property="og:locale" content="es_GT">
 
-<!-- Twitter / X card -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="SERIMA | Grupo Técnico en Construcción">
 <meta name="twitter:description" content="Construcción civil y vial en Guatemala desde 2011.">
@@ -27,7 +24,7 @@
 <link rel="stylesheet" href="styles.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
 
 <script type="application/ld+json">
 {
@@ -58,18 +55,20 @@
       <span class="site-logo-text">SERIMA</span>
     </a>
 
-    <nav class="main-nav" aria-label="Navegación principal">
+    <nav class="main-nav" id="main-nav" aria-label="Navegación principal">
       <ul>
-        <li><a href="#sobre-serima">Sobre SERIMA</a></li>
-        <li><a href="#servicios">Servicios</a></li>
+        <li><a href="#top">Inicio</a></li>
+        <li><a href="#nosotros">Nosotros</a></li>
+        <li><a href="#experiencia">Experiencia</a></li>
         <li><a href="#proyectos">Proyectos</a></li>
+        <li><a href="#enfoque">Enfoque</a></li>
         <li><a href="#contacto">Contacto</a></li>
       </ul>
     </nav>
 
     <div class="header-cta">
-      <a href="#contacto" class="btn btn-secondary">Contacto</a>
-      <button type="button" class="nav-toggle" id="nav-toggle" aria-label="Abrir menú" aria-expanded="false">
+      <a href="#contacto" class="btn btn-secondary">Contactar</a>
+      <button type="button" class="nav-toggle" id="nav-toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="main-nav">
         <span></span><span></span><span></span>
       </button>
     </div>
@@ -80,69 +79,136 @@
 
   <!-- HERO -->
   <section class="hero" id="top">
-    <div class="container">
+    <div class="container hero-grid">
       <div class="hero-copy">
-        <h1>Precisión técnica para cada obra, desde 2011.</h1>
-        <p class="lede">SERIMA es un grupo técnico especializado en construcción civil y vial, con soluciones constructivas confiables para infraestructura, puentes y obra vial en Guatemala.</p>
+        <h1>Construimos soluciones que dejan huella.</h1>
+        <p class="lede">Grupo Técnico en Construcción Selma, S.A. — construcción civil y vial en Guatemala desde 2011, con planificación, precisión técnica y compromiso en cada etapa de la obra.</p>
         <div class="hero-actions">
           <a href="#proyectos" class="btn btn-primary">Ver proyectos</a>
-          <a href="#contacto" class="btn btn-secondary">Contactar a SERIMA</a>
+          <a href="#contacto" class="btn btn-secondary">Contáctanos</a>
         </div>
-        <div class="hero-stats">
-          <div><strong>2011</strong><span>Inicio de operaciones</span></div>
-          <div><strong>Civil &amp; vial</strong><span>Áreas de especialización</span></div>
-          <div><strong>Guatemala</strong><span>Cobertura de proyectos</span></div>
-        </div>
+
+        <dl class="title-block">
+          <div><dt>Empresa</dt><dd>SERIMA</dd></div>
+          <div><dt>Desde</dt><dd>2011</dd></div>
+          <div><dt>Especialidad</dt><dd>Civil y vial</dd></div>
+          <div><dt>Cobertura</dt><dd>Guatemala</dd></div>
+        </dl>
       </div>
-      <div class="hero-media">
-        <div class="frame corner-marks">
-          <img src="recursos/bateria de pilotes hincados y colocados a plomo.png" alt="Batería de pilotes hincados y aplomados, proyecto Puente Samalá" loading="eager" width="720" height="900">
-        </div>
-      </div>
+
+      <figure class="hero-media">
+        <span class="crop crop-tl" aria-hidden="true"></span>
+        <span class="crop crop-br" aria-hidden="true"></span>
+        <img src="recursos/bateria de pilotes hincados y colocados a plomo.png" alt="Batería de pilotes hincados y aplomados, proyecto Puente Samalá" loading="eager">
+        <figcaption><span>Fig. 01</span>Puente Samalá — pilotes hincados y aplomados</figcaption>
+      </figure>
     </div>
   </section>
 
-  <!-- SOBRE SERIMA -->
-  <section class="about" id="sobre-serima">
-    <div class="container">
+  <!-- FRASE DESTACADA -->
+  <section class="statement">
+    <div class="container statement-grid">
+      <h2>Construcción con experiencia, compromiso y visión técnica.</h2>
+      <p>Desde 2011 desarrollamos y participamos en proyectos de construcción civil y vial que requieren organización, conocimiento técnico y atención a cada etapa de la obra. Buscamos que cada proyecto avance con claridad, responsabilidad y una ejecución enfocada en resultados.</p>
+    </div>
+  </section>
+
+  <!-- NOSOTROS -->
+  <section class="about" id="nosotros">
+    <div class="container about-grid">
       <div class="about-figure">
         <span class="since">2011</span>
-        <span class="since-label">Años de trayectoria en construcción civil y vial.</span>
+        <span class="since-label">años construyendo experiencia en obra civil y vial.</span>
       </div>
-      <div>
-        <span class="eyebrow">Quiénes somos</span>
-        <h2>Soluciones constructivas confiables, con visión técnica.</h2>
-        <p>SERIMA, Grupo Técnico en Construcción Selma, S.A., es una empresa especializada en construcción civil y vial, con experiencia desde 2011. A lo largo de su trayectoria ha participado en proyectos que requieren precisión técnica, planificación, calidad en la ejecución y compromiso con cada obra.</p>
-        <p>Nuestro enfoque está orientado a brindar soluciones constructivas confiables, adaptadas a las necesidades de cada proyecto, participando en trabajos de infraestructura, obras viales y construcción civil.</p>
-        <p>La experiencia adquirida desde 2011 nos permite abordar distintos retos constructivos con una visión técnica y orientada a resultados, buscando siempre entregar trabajos de calidad y generar confianza en nuestros clientes.</p>
+
+      <div class="about-copy">
+        <p class="sheet-tag">Lám. 01 — Quiénes somos</p>
+        <h2>Una empresa construida sobre experiencia.</h2>
+        <p>SERIMA, Grupo Técnico en Construcción Selma, S.A., es una empresa guatemalteca especializada en construcción civil y vial. Hemos participado en proyectos de infraestructura, obras viales y construcción civil que requieren planificación, coordinación y precisión en cada etapa.</p>
+        <blockquote>Entendemos que una obra no se trata únicamente de construir: detrás de cada proyecto existen tiempos, condiciones técnicas y objetivos que deben considerarse desde el inicio.</blockquote>
+        <p>Creemos en hacer bien las cosas desde el principio. Cada proyecto es un nuevo reto que requiere analizar sus condiciones particulares, organizar los trabajos y mantener una comunicación clara durante todo el proceso.</p>
       </div>
+    </div>
+
+    <div class="container">
+      <p class="chips-label">Nuestra experiencia incluye trabajos relacionados con:</p>
+      <ul class="chip-list">
+        <li>Construcción civil</li>
+        <li>Construcción vial</li>
+        <li>Obras de infraestructura</li>
+        <li>Trabajos en puentes</li>
+        <li>Pilotes</li>
+        <li>Fundición de concreto</li>
+        <li>Concreto estructural</li>
+        <li>Acero de refuerzo</li>
+        <li>Protección de taludes</li>
+        <li>Muros</li>
+        <li>Mantenimiento de carreteras no pavimentadas</li>
+        <li>Demolición y reconstrucción</li>
+        <li>Armado y fundición</li>
+        <li>Trabajos de acabados</li>
+        <li>Sistemas de protección y control de caídas</li>
+      </ul>
     </div>
   </section>
 
-  <!-- SERVICIOS -->
-  <section class="services" id="servicios">
+  <!-- ÁREAS DE EXPERIENCIA -->
+  <section class="services" id="experiencia">
     <div class="container">
-      <span class="eyebrow">Capacidades técnicas</span>
+      <p class="sheet-tag">Lám. 02 — Áreas de experiencia</p>
       <h2>Áreas en las que trabajamos</h2>
-      <p>Especialidades identificadas a partir de los proyectos ejecutados por SERIMA.</p>
 
       <div class="services-grid">
         <div class="service-card">
-          <span class="num">01</span>
+          <span class="code">§ CIV</span>
+          <h3>Construcción civil</h3>
+          <p>Trabajos que requieren planificación, coordinación y ejecución técnica: estructuras de concreto, acero de refuerzo, muros, acabados y otros elementos de infraestructura.</p>
+        </div>
+        <div class="service-card">
+          <span class="code">§ VIAL</span>
+          <h3>Construcción vial</h3>
+          <p>Infraestructura vial y trabajos para mejorar, mantener o intervenir vías: mantenimiento de carreteras no pavimentadas, mejoramiento de calles y protección de infraestructura vial.</p>
+        </div>
+        <div class="service-card">
+          <span class="code">§ PTE</span>
           <h3>Puentes e infraestructura</h3>
-          <p>Cimentación con pilotes, vigas de apoyo, vigas longitudinales y losas en concreto estructural para puentes vehiculares.</p>
+          <p>Proyectos que combinan varias especialidades y etapas constructivas: pilotes, concreto estructural, acero de refuerzo, armado, fundición, demolición y acabados.</p>
         </div>
         <div class="service-card">
-          <span class="num">02</span>
-          <h3>Estabilización de taludes</h3>
-          <p>Muros de contención, soil nailing, barreras de protección dinámicas y sistemas de control de caída de rocas.</p>
-        </div>
-        <div class="service-card">
-          <span class="num">03</span>
-          <h3>Obra vial</h3>
-          <p>Pavimentación con concreto hidráulico, cunetas revestidas, compactación de hombros y mantenimiento de carreteras no pavimentadas.</p>
+          <span class="code">§ TAL</span>
+          <h3>Protección y estabilización</h3>
+          <p>Trabajos en muros y protección de taludes, que responden a condiciones particulares del terreno y protegen áreas específicas de la infraestructura.</p>
         </div>
       </div>
+    </div>
+
+    <div class="container traits-block">
+      <p class="sheet-tag">Lo que nos define</p>
+      <dl class="traits-list">
+        <div><dt>Precisión</dt><dd>Atención a los aspectos técnicos y a las condiciones particulares de cada proyecto.</dd></div>
+        <div><dt>Compromiso</dt><dd>Responsabilidad con el proyecto, sus objetivos y las personas involucradas.</dd></div>
+        <div><dt>Experiencia</dt><dd>Desde 2011, participando en distintos tipos de obra civil y vial.</dd></div>
+        <div><dt>Planificación</dt><dd>Una buena ejecución comienza con una correcta organización de actividades y recursos.</dd></div>
+        <div><dt>Adaptabilidad</dt><dd>Cada proyecto presenta condiciones diferentes; buscamos la solución que corresponde a cada obra.</dd></div>
+        <div><dt>Calidad de ejecución</dt><dd>Trabajo ordenado, responsable y con atención a los detalles.</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <!-- ENFOQUE -->
+  <section class="approach" id="enfoque">
+    <div class="container">
+      <p class="sheet-tag">Lám. 03 — Enfoque</p>
+      <h2>Cada proyecto comienza entendiendo el reto</h2>
+      <p class="approach-lede">Las condiciones del terreno, el tipo de estructura, la ubicación y los objetivos cambian de un proyecto a otro. Por eso partimos de comprender qué necesita realmente cada obra.</p>
+
+      <ol class="process-rail">
+        <li><span class="step-index">01</span><h3>Analizamos</h3><p>Las condiciones y características del trabajo que se debe realizar.</p></li>
+        <li><span class="step-index">02</span><h3>Planificamos</h3><p>Organizamos las actividades necesarias para desarrollar la obra de manera ordenada.</p></li>
+        <li><span class="step-index">03</span><h3>Ejecutamos</h3><p>Llevamos a cabo los trabajos considerando los requerimientos técnicos de cada proyecto.</p></li>
+        <li><span class="step-index">04</span><h3>Revisamos</h3><p>Prestamos atención a los detalles y al desarrollo de los trabajos en cada etapa.</p></li>
+        <li><span class="step-index">05</span><h3>Entregamos</h3><p>Buscamos que cada proyecto avance hacia sus objetivos con una ejecución responsable.</p></li>
+      </ol>
     </div>
   </section>
 
@@ -151,8 +217,8 @@
     <div class="container">
       <div class="projects-header">
         <div>
-          <span class="eyebrow">Trabajo realizado</span>
-          <h2>Proyectos</h2>
+          <p class="sheet-tag">Lám. 04 — Proyectos</p>
+          <h2>Obras que cuentan nuestra experiencia</h2>
         </div>
         <div class="filter-bar" id="filter-bar" role="group" aria-label="Filtrar proyectos por categoría">
           <button type="button" class="filter-btn active" data-filter="todos">Todos</button>
@@ -163,28 +229,28 @@
       </div>
 
       <div class="projects-grid" id="projects-grid">
-        <!-- Las tarjetas de proyecto se generan dinámicamente desde main.js -->
+        <!-- Tarjetas generadas dinámicamente por main.js -->
       </div>
     </div>
   </section>
 
   <!-- CTA BAND -->
   <section class="cta-band">
-    <div class="container">
+    <div class="container cta-band-grid">
       <div>
-        <h2>¿Tienes un proyecto en marcha?</h2>
-        <p>Comunícate con nosotros para conversar sobre tu obra.</p>
+        <h2>¿Tienes un proyecto en mente?</h2>
+        <p>Elegir una constructora significa confiar un proyecto real a un equipo responsable de cada etapa. Conversemos sobre lo que necesitas construir.</p>
       </div>
-      <a href="#contacto" class="btn btn-primary">Contacto</a>
+      <a href="#contacto" class="btn btn-primary">Hablar con SERIMA</a>
     </div>
   </section>
 
-  <!-- CONTACTO (informativo) -->
+  <!-- CONTACTO -->
   <section class="contact" id="contacto">
     <div class="container">
-      <span class="eyebrow">Contacto</span>
-      <h2>Hablemos de tu proyecto</h2>
-      <p>Comunícate directamente con nuestro equipo por cualquiera de estos medios.</p>
+      <p class="sheet-tag">Lám. 05 — Contacto</p>
+      <h2>Estamos para escucharte</h2>
+      <p class="contact-lede">Si tienes un proyecto de construcción civil o vial, comunícate directamente con nosotros.</p>
 
       <div class="contact-grid">
         <div class="contact-card">
@@ -199,13 +265,13 @@
           <span class="label">Correo electrónico</span>
           <a href="mailto:serimasa@yahoo.com">serimasa@yahoo.com</a>
         </div>
-        <div class="contact-card">
+        <div class="contact-card contact-card-wide">
           <span class="label">Dirección</span>
-          <span class="value">13 Calle 05-31, Edificio Ascent, Oficina 344, Nivel 3, Zona 9, Guatemala, Guatemala</span>
+          <span class="value">13 Calle 05-31, Edificio Ascent, Oficina 344, Nivel 3, Zona 9, Guatemala, Guatemala.</span>
         </div>
         <div class="contact-card">
-          <span class="label">Horario de atención</span>
-          <span class="value">Lunes a viernes de 8:00 a 17:00</span>
+          <span class="label">Horario</span>
+          <span class="value">Lunes a viernes, 8:00 a. m. — 5:00 p. m.</span>
         </div>
       </div>
     </div>
@@ -222,8 +288,8 @@
     <div class="footer-col">
       <h4>Navegación</h4>
       <ul>
-        <li><a href="#sobre-serima">Sobre SERIMA</a></li>
-        <li><a href="#servicios">Servicios</a></li>
+        <li><a href="#nosotros">Nosotros</a></li>
+        <li><a href="#experiencia">Experiencia</a></li>
         <li><a href="#proyectos">Proyectos</a></li>
         <li><a href="#contacto">Contacto</a></li>
       </ul>
@@ -238,7 +304,7 @@
     </div>
   </div>
   <div class="container footer-bottom">
-    <span>&copy; 2026 SERIMA — Grupo Técnico en Construcción Selma, S.A. Todos los derechos reservados.</span>
+    <span>&copy; <span id="footer-year">2026</span> SERIMA — Grupo Técnico en Construcción Selma, S.A. Todos los derechos reservados.</span>
     <a href="privacidad.html">Política de Privacidad</a>
   </div>
 </footer>
