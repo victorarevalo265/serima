@@ -6,6 +6,51 @@
     <priority>1.0</priority>
   </url>
   <url>
+    <loc>https://serimagt.com/nosotros.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://serimagt.com/servicios.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://serimagt.com/proyectos.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://serimagt.com/proyecto.html?id=puente-samala</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://serimagt.com/proyecto.html?id=taludes</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://serimagt.com/proyecto.html?id=puente-salcaja</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://serimagt.com/proyecto.html?id=arada</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://serimagt.com/proyecto.html?id=mantenimiento</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://serimagt.com/contacto.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
     <loc>https://serimagt.com/privacidad.html</loc>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
