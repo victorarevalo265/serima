@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="es-GT">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title id="page-title">Proyecto | SERIMA</title>
+<meta name="description" id="page-description" content="Detalle de proyecto ejecutado por SERIMA, Grupo Técnico en Construcción.">
+<link rel="icon" href="recursos/LOGO SERIMA.jpeg">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Saltar al contenido principal</a>
+
+<header class="site-header" id="site-header">
+  <div class="container">
+    <a href="index.html" class="site-logo">
+      <img src="recursos/LOGO SERIMA.jpeg" alt="Logotipo de SERIMA">
+      <span class="site-logo-text">SERIMA</span>
+    </a>
+    <nav class="main-nav" id="main-nav" aria-label="Navegación principal">
+      <ul>
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="nosotros.html">Nosotros</a></li>
+        <li><a href="servicios.html">Servicios</a></li>
+        <li><a href="proyectos.html" aria-current="page">Proyectos</a></li>
+        <li><a href="contacto.html">Contacto</a></li>
+      </ul>
+    </nav>
+    <div class="header-cta">
+      <a href="contacto.html" class="btn btn-primary">Cotiza tu proyecto</a>
+      <button type="button" class="nav-toggle" id="nav-toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="main-nav">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <section class="page-hero" id="project-hero">
+    <div class="container project-detail-head">
+      <div>
+        <p class="page-hero-tag" id="project-code">Proyecto</p>
+        <h1 id="project-name">Cargando proyecto…</h1>
+        <p id="project-summary"></p>
+        <a href="proyectos.html" class="btn btn-outline-light">← Volver a proyectos</a>
+      </div>
+      <dl class="meta-list">
+        <div><dt>Categoría</dt><dd id="project-category">—</dd></div>
+        <div><dt>Ubicación</dt><dd id="project-location">—</dd></div>
+        <div><dt>Año</dt><dd id="project-year">—</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="detail-gallery" id="project-gallery"></div>
+
+      <p id="project-description" style="margin-top:var(--space-md); font-size:1.05rem; max-width:70ch;"></p>
+
+      <div class="spec-table" id="project-specs"></div>
+    </div>
+  </section>
+
+  <section class="cta-band">
+    <div class="container cta-band-grid">
+      <div>
+        <h2>¿Necesitas un trabajo similar?</h2>
+        <p>Cuéntanos las condiciones de tu proyecto y te contactamos para revisarlo.</p>
+      </div>
+      <div class="cta-band-actions">
+        <a href="contacto.html" class="btn btn-primary">Hablar con SERIMA</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div class="footer-brand">
+      <span class="site-logo-text">SERIMA</span>
+      <p>Grupo Técnico en Construcción Selma, S.A. Construcción civil y vial en Guatemala desde 2011.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Navegación</h4>
+      <ul>
+        <li><a href="nosotros.html">Nosotros</a></li>
+        <li><a href="servicios.html">Servicios</a></li>
+        <li><a href="proyectos.html">Proyectos</a></li>
+        <li><a href="contacto.html">Contacto</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Servicios</h4>
+      <ul>
+        <li><a href="servicios.html#civil">Construcción civil</a></li>
+        <li><a href="servicios.html#vial">Construcción vial</a></li>
+        <li><a href="servicios.html#puentes">Puentes</a></li>
+        <li><a href="servicios.html#taludes">Taludes</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contacto</h4>
+      <ul>
+        <li><a href="tel:+50248851755">4885-1755</a></li>
+        <li><a href="mailto:serimasa@yahoo.com">serimasa@yahoo.com</a></li>
+        <li><a href="https://wa.me/50248851755" target="_blank" rel="noopener">WhatsApp</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="container footer-bottom">
+    <span>&copy; <span id="footer-year">2026</span> SERIMA — Grupo Técnico en Construcción Selma, S.A. Todos los derechos reservados.</span>
+    <a href="privacidad.html">Política de Privacidad</a>
+  </div>
+</footer>
+
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-hidden="true" aria-label="Imagen ampliada">
+  <button type="button" class="lightbox-close" id="lightbox-close" aria-label="Cerrar">&times;</button>
+  <img id="lightbox-img" src="" alt="">
+</div>
+
+<script src="data.js"></script>
+<script src="main.js"></script>
+<script>
+  (function () {
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get("id");
+    const project = id ? serimaGetProject(id) : null;
+
+    if (!project) {
+      document.getElementById("project-name").textContent = "Proyecto no encontrado";
+      document.getElementById("project-summary").textContent =
+        "No encontramos el proyecto solicitado. Vuelve al listado de proyectos para ver el trabajo realizado por SERIMA.";
+      return;
+    }
+
+    document.title = project.name + " | SERIMA";
+    document.getElementById("page-description").setAttribute("content", project.summary);
+    document.getElementById("project-code").textContent = project.code + " — " + project.categoryLabel;
+    document.getElementById("project-name").textContent = project.name;
+    document.getElementById("project-summary").textContent = project.summary;
+    document.getElementById("project-category").textContent = project.categoryLabel;
+    document.getElementById("project-location").textContent = project.location || "Guatemala";
+    document.getElementById("project-year").textContent = project.year || "—";
+    document.getElementById("project-description").textContent = project.description;
+
+    const galleryWrap = document.getElementById("project-gallery");
+    const shown = project.gallery.slice(0, 3);
+    shown.forEach((img, i) => {
+      const div = document.createElement("div");
+      div.className = i === 0 ? "main-img" : "sub-img";
+      div.innerHTML = '<img src="' + serimaSrc(img) + '" alt="' + project.name + '" loading="lazy">';
+      galleryWrap.appendChild(div);
+    });
+
+    const specsWrap = document.getElementById("project-specs");
+    if (project.specs && project.specs.length) {
+      project.specs.forEach((s) => {
+        const row = document.createElement("div");
+        row.className = "row";
+        row.innerHTML = "<span>" + s.label + "</span><span>" + s.value + "</span>";
+        specsWrap.appendChild(row);
+      });
+    }
+
+    const lightbox = document.getElementById("lightbox");
+    const lightboxImg = document.getElementById("lightbox-img");
+    galleryWrap.querySelectorAll("img").forEach((img) => {
+      img.addEventListener("click", () => {
+        lightboxImg.src = img.src;
+        lightboxImg.alt = img.alt;
+        lightbox.classList.add("open");
+        lightbox.setAttribute("aria-hidden", "false");
+        document.body.style.overflow = "hidden";
+      });
+    });
+    function closeLightbox() {
+      lightbox.classList.remove("open");
+      lightbox.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+    }
+    document.getElementById("lightbox-close").addEventListener("click", closeLightbox);
+    lightbox.addEventListener("click", (e) => { if (e.target === lightbox) closeLightbox(); });
+    document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeLightbox(); });
+  })();
+</script>
+</body>
+</html>

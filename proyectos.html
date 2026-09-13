@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="es-GT">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Proyectos | SERIMA — Puentes, taludes y obra vial en Guatemala</title>
+<meta name="description" content="Proyectos ejecutados por SERIMA: puentes, estabilización de taludes y obra vial en distintos puntos de Guatemala.">
+<link rel="canonical" href="https://serimagt.com/proyectos.html">
+<link rel="icon" href="recursos/LOGO SERIMA.jpeg">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Saltar al contenido principal</a>
+
+<header class="site-header" id="site-header">
+  <div class="container">
+    <a href="index.html" class="site-logo">
+      <img src="recursos/LOGO SERIMA.jpeg" alt="Logotipo de SERIMA">
+      <span class="site-logo-text">SERIMA</span>
+    </a>
+    <nav class="main-nav" id="main-nav" aria-label="Navegación principal">
+      <ul>
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="nosotros.html">Nosotros</a></li>
+        <li><a href="servicios.html">Servicios</a></li>
+        <li><a href="proyectos.html" aria-current="page">Proyectos</a></li>
+        <li><a href="contacto.html">Contacto</a></li>
+      </ul>
+    </nav>
+    <div class="header-cta">
+      <a href="contacto.html" class="btn btn-primary">Cotiza tu proyecto</a>
+      <button type="button" class="nav-toggle" id="nav-toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="main-nav">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <section class="page-hero">
+    <div class="container">
+      <p class="page-hero-tag">Proyectos</p>
+      <h1>Obras que respaldan nuestra experiencia.</h1>
+      <p>Una muestra del trabajo realizado en puentes, taludes y obra vial en distintos puntos de Guatemala.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="projects-toolbar">
+        <p class="eyebrow" style="margin:0;">Filtrar por categoría</p>
+        <div class="filter-bar" id="filter-bar" role="group" aria-label="Filtrar proyectos por categoría">
+          <button type="button" class="filter-btn active" data-filter="todos">Todos</button>
+          <button type="button" class="filter-btn" data-filter="puentes">Puentes</button>
+          <button type="button" class="filter-btn" data-filter="taludes">Taludes</button>
+          <button type="button" class="filter-btn" data-filter="vial">Obra vial</button>
+        </div>
+      </div>
+      <div class="projects-grid" id="projects-grid"></div>
+    </div>
+  </section>
+
+  <section class="cta-band">
+    <div class="container cta-band-grid">
+      <div>
+        <h2>¿Tu proyecto necesita este tipo de trabajo?</h2>
+        <p>Cuéntanos el alcance y te contactamos para revisarlo.</p>
+      </div>
+      <div class="cta-band-actions">
+        <a href="contacto.html" class="btn btn-primary">Hablar con SERIMA</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div class="footer-brand">
+      <span class="site-logo-text">SERIMA</span>
+      <p>Grupo Técnico en Construcción Selma, S.A. Construcción civil y vial en Guatemala desde 2011.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Navegación</h4>
+      <ul>
+        <li><a href="nosotros.html">Nosotros</a></li>
+        <li><a href="servicios.html">Servicios</a></li>
+        <li><a href="proyectos.html">Proyectos</a></li>
+        <li><a href="contacto.html">Contacto</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Servicios</h4>
+      <ul>
+        <li><a href="servicios.html#civil">Construcción civil</a></li>
+        <li><a href="servicios.html#vial">Construcción vial</a></li>
+        <li><a href="servicios.html#puentes">Puentes</a></li>
+        <li><a href="servicios.html#taludes">Taludes</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contacto</h4>
+      <ul>
+        <li><a href="tel:+50248851755">4885-1755</a></li>
+        <li><a href="mailto:serimasa@yahoo.com">serimasa@yahoo.com</a></li>
+        <li><a href="https://wa.me/50248851755" target="_blank" rel="noopener">WhatsApp</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="container footer-bottom">
+    <span>&copy; <span id="footer-year">2026</span> SERIMA — Grupo Técnico en Construcción Selma, S.A. Todos los derechos reservados.</span>
+    <a href="privacidad.html">Política de Privacidad</a>
+  </div>
+</footer>
+
+<script src="data.js"></script>
+<script src="main.js"></script>
+<script>
+  (function () {
+    const grid = document.getElementById("projects-grid");
+    const filterBar = document.getElementById("filter-bar");
+
+    function renderCards() {
+      grid.innerHTML = "";
+      SERIMA_PROJECTS.forEach((p) => {
+        const a = document.createElement("a");
+        a.href = "proyecto.html?id=" + p.id;
+        a.className = "project-card";
+        a.dataset.category = p.category;
+        a.innerHTML =
+          '<span class="thumb"><img src="' + serimaSrc(p.cover) + '" alt="' + p.name + '" loading="lazy">' +
+          '<span class="tag">' + p.categoryLabel + '</span></span>' +
+          '<span class="body"><h3>' + p.name + '</h3>' +
+          '<span class="meta">' + (p.location || "Guatemala") + '</span></span>';
+        grid.appendChild(a);
+      });
+    }
+
+    filterBar.addEventListener("click", (e) => {
+      const btn = e.target.closest(".filter-btn");
+      if (!btn) return;
+      filterBar.querySelectorAll(".filter-btn").forEach((b) => b.classList.remove("active"));
+      btn.classList.add("active");
+      const cat = btn.dataset.filter;
+      document.querySelectorAll(".project-card").forEach((card) => {
+        card.hidden = cat !== "todos" && card.dataset.category !== cat;
+      });
+    });
+
+    renderCards();
+  })();
+</script>
+</body>
+</html>
