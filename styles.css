@@ -228,7 +228,6 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   animation: reveal-left 1s cubic-bezier(.19,1,.22,1) 0.1s forwards;
 }
 .hero-media img { width: 100%; height: 100%; object-fit: cover; }
-.hero-media-graphic svg { width: 100%; height: 100%; display: block; }
 .hero-media::after {
   content: "";
   position: absolute; inset: 0;
