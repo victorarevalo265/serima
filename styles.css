@@ -268,6 +268,9 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 .statement-grid { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: clamp(28px, 5vw, 64px); align-items: center; }
 .statement h2 { margin: 0; }
 .statement p { margin: 0; max-width: 54ch; font-size: 1.05rem; }
+.statement-brand-mark { display: flex; align-items: center; justify-content: flex-start; }
+.statement-brand-mark img { width: clamp(96px, 14vw, 140px); height: auto; border-radius: 4px; }
+@media (max-width: 900px) { .statement-brand-mark { order: -1; } }
 
 /* =========================================================
    SPLIT (imagen + texto) — usado en Nosotros / index
@@ -297,7 +300,8 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px;
   background: var(--line); border: 1px solid var(--line); margin-top: 40px;
 }
-.value-card { background: var(--card); padding: 32px 30px; }
+.value-card { background: var(--card); padding: 32px 30px; transition: background 0.2s ease; }
+.value-card:hover { background: var(--stone-deep); }
 .value-card h3 { margin-bottom: 8px; font-size: 1.2rem; }
 .value-card p { font-size: 0.95rem; margin-bottom: 0; }
 
@@ -426,6 +430,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 .cta-band h2 { color: var(--stone); margin-bottom: 10px; font-size: clamp(1.8rem, 3.2vw, 2.5rem); }
 .cta-band p { color: var(--stone); opacity: 0.7; margin-bottom: 0; max-width: 48ch; }
 .cta-band-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+.cta-band-logo { height: 40px; width: auto; border-radius: 3px; margin-bottom: 18px; }
 
 /* =========================================================
    CONTACTO
@@ -446,8 +451,14 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 .contact-channel h3 { font-size: 1.05rem; margin-bottom: 4px; }
 .contact-channel span, .contact-channel p { font-size: 0.93rem; margin-bottom: 0; opacity: 0.75; }
 
+.contact-map-col { display: flex; flex-direction: column; gap: 12px; }
 .contact-map { border-radius: 4px; overflow: hidden; border: 1px solid var(--line); min-height: 340px; }
 .contact-map iframe { width: 100%; height: 100%; min-height: 340px; border: 0; display: block; }
+.map-directions-link {
+  align-self: flex-start; font-weight: 600; font-size: 0.92rem; color: var(--amber-deep);
+  text-decoration: none; transition: color 0.2s ease;
+}
+.map-directions-link:hover { color: var(--basalt); text-decoration: underline; }
 
 .hours-card { margin-top: 14px; padding: 22px; border: 1px solid var(--line); background: var(--stone-deep); border-radius: 4px; }
 .hours-card h3 { font-size: 1rem; margin-bottom: 10px; }
