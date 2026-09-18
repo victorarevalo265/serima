@@ -3,8 +3,23 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; base-uri 'self'; form-action 'self'; object-src 'none'; frame-ancestors 'self';">
 <title id="page-title">Proyecto | SERIMA</title>
 <meta name="description" id="page-description" content="Detalle de proyecto ejecutado por SERIMA, Grupo Técnico en Construcción.">
+<link rel="canonical" href="https://serimagt.com/proyecto.html" id="canonical-link">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="SERIMA">
+<meta property="og:title" content="Proyecto | SERIMA" id="og-title">
+<meta property="og:description" content="Detalle de proyecto ejecutado por SERIMA, Grupo Técnico en Construcción." id="og-description">
+<meta property="og:url" content="https://serimagt.com/proyecto.html" id="og-url">
+<meta property="og:image" content="https://serimagt.com/recursos/LOGO%20SERIMA.jpeg" id="og-image">
+<meta property="og:locale" content="es_GT">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#191512">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="icon" href="recursos/LOGO SERIMA.jpeg">
 <link rel="stylesheet" href="styles.css">
 </head>
@@ -60,6 +75,17 @@
       <p id="project-description" style="margin-top:var(--space-md); font-size:1.05rem; max-width:70ch;"></p>
 
       <div class="spec-table" id="project-specs"></div>
+
+      <p class="gallery-more-label" id="gallery-more-label" hidden></p>
+      <div class="gallery-extra" id="gallery-extra"></div>
+    </div>
+  </section>
+
+  <section class="related-projects" id="related-section" hidden>
+    <div class="container">
+      <p class="eyebrow">También te puede interesar</p>
+      <h2>Otros proyectos ejecutados por SERIMA</h2>
+      <div class="projects-grid" id="related-projects"></div>
     </div>
   </section>
 
@@ -80,8 +106,11 @@
 <footer class="site-footer">
   <div class="container footer-grid">
     <div class="footer-brand">
-      <span class="site-logo-text">SERIMA</span>
-      <p>Grupo Técnico en Construcción Selma, S.A. Construcción civil y vial en Guatemala desde 2011.</p>
+      <div class="footer-logo-row">
+        <span class="footer-logo-mark"><img src="recursos/LOGO SERIMA.jpeg" alt="Logotipo de SERIMA"></span>
+        <span class="site-logo-text">SERIMA</span>
+      </div>
+      <p>Grupo Técnico en Construcción SERIMA, S.A. Construcción civil y vial en Guatemala desde 2011.</p>
     </div>
     <div class="footer-col">
       <h4>Navegación</h4>
@@ -111,14 +140,17 @@
     </div>
   </div>
   <div class="container footer-bottom">
-    <span>&copy; <span id="footer-year">2026</span> SERIMA — Grupo Técnico en Construcción Selma, S.A. Todos los derechos reservados.</span>
+    <span>&copy; <span id="footer-year">2026</span> SERIMA — Grupo Técnico en Construcción SERIMA, S.A. Todos los derechos reservados.</span>
     <a href="privacidad.html">Política de Privacidad</a>
   </div>
 </footer>
 
 <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-hidden="true" aria-label="Imagen ampliada">
-  <button type="button" class="lightbox-close" id="lightbox-close" aria-label="Cerrar">&times;</button>
+  <button type="button" class="lightbox-nav lightbox-prev" id="lightbox-prev" aria-label="Foto anterior">&#8249;</button>
   <img id="lightbox-img" src="" alt="">
+  <button type="button" class="lightbox-nav lightbox-next" id="lightbox-next" aria-label="Foto siguiente">&#8250;</button>
+  <span class="lightbox-counter" id="lightbox-counter"></span>
+  <button type="button" class="lightbox-close" id="lightbox-close" aria-label="Cerrar">&times;</button>
 </div>
 
 <script src="data.js"></script>
@@ -136,8 +168,15 @@
       return;
     }
 
+    const pageUrl = "https://serimagt.com/proyecto.html?id=" + project.id;
     document.title = project.name + " | SERIMA";
     document.getElementById("page-description").setAttribute("content", project.summary);
+    document.getElementById("canonical-link").setAttribute("href", pageUrl);
+    document.getElementById("og-title").setAttribute("content", project.name + " | SERIMA");
+    document.getElementById("og-description").setAttribute("content", project.summary);
+    document.getElementById("og-url").setAttribute("content", pageUrl);
+    document.getElementById("og-image").setAttribute("content", "https://serimagt.com/" + serimaSrc(project.cover));
+
     document.getElementById("project-code").textContent = project.code + " — " + project.categoryLabel;
     document.getElementById("project-name").textContent = project.name;
     document.getElementById("project-summary").textContent = project.summary;
@@ -146,14 +185,31 @@
     document.getElementById("project-year").textContent = project.year || "—";
     document.getElementById("project-description").textContent = project.description;
 
+    // Galería principal: las primeras 3 imágenes, en el layout destacado.
     const galleryWrap = document.getElementById("project-gallery");
-    const shown = project.gallery.slice(0, 3);
-    shown.forEach((img, i) => {
+    const featured = project.gallery.slice(0, 3);
+    featured.forEach((img, i) => {
       const div = document.createElement("div");
       div.className = i === 0 ? "main-img" : "sub-img";
-      div.innerHTML = '<img src="' + serimaSrc(img) + '" alt="' + project.name + '" loading="lazy">';
+      div.innerHTML = '<img src="' + serimaSrc(img) + '" alt="' + project.name + '" loading="' + (i === 0 ? "eager" : "lazy") + '">';
       galleryWrap.appendChild(div);
     });
+
+    // Resto de fotos del proyecto, en una cuadrícula aparte (antes se perdían).
+    const extraWrap = document.getElementById("gallery-extra");
+    const extraLabel = document.getElementById("gallery-more-label");
+    const extra = project.gallery.slice(3);
+    if (extra.length) {
+      extraLabel.textContent = "Más fotos de este proyecto (" + extra.length + ")";
+      extraLabel.hidden = false;
+      extra.forEach((img) => {
+        const el = document.createElement("img");
+        el.src = serimaSrc(img);
+        el.alt = project.name;
+        el.loading = "lazy";
+        extraWrap.appendChild(el);
+      });
+    }
 
     const specsWrap = document.getElementById("project-specs");
     if (project.specs && project.specs.length) {
@@ -165,25 +221,74 @@
       });
     }
 
+    // Proyectos relacionados: misma categoría primero, se completa con el resto.
+    const relatedSection = document.getElementById("related-section");
+    const relatedWrap = document.getElementById("related-projects");
+    const others = SERIMA_PROJECTS.filter((p) => p.id !== project.id);
+    const sameCategory = others.filter((p) => p.category === project.category);
+    const rest = others.filter((p) => p.category !== project.category);
+    const related = sameCategory.concat(rest).slice(0, 3);
+    if (related.length) {
+      related.forEach((p) => {
+        const a = document.createElement("a");
+        a.href = "proyecto.html?id=" + p.id;
+        a.className = "project-card";
+        a.innerHTML =
+          '<span class="thumb"><img src="' + serimaSrc(p.cover) + '" alt="' + p.name + '" loading="lazy">' +
+          '<span class="tag">' + p.categoryLabel + '</span></span>' +
+          '<span class="body"><h3>' + p.name + '</h3>' +
+          '<span class="meta">' + (p.location || "Guatemala") + '</span></span>';
+        relatedWrap.appendChild(a);
+      });
+      relatedSection.hidden = false;
+    }
+
+    // Visor de imagen ampliada, con navegación anterior/siguiente y teclado.
+    const allImages = project.gallery.map((img) => ({ src: serimaSrc(img), alt: project.name }));
     const lightbox = document.getElementById("lightbox");
     const lightboxImg = document.getElementById("lightbox-img");
-    galleryWrap.querySelectorAll("img").forEach((img) => {
-      img.addEventListener("click", () => {
-        lightboxImg.src = img.src;
-        lightboxImg.alt = img.alt;
-        lightbox.classList.add("open");
-        lightbox.setAttribute("aria-hidden", "false");
-        document.body.style.overflow = "hidden";
-      });
-    });
+    const lightboxCounter = document.getElementById("lightbox-counter");
+    const prevBtn = document.getElementById("lightbox-prev");
+    const nextBtn = document.getElementById("lightbox-next");
+    let currentIndex = 0;
+
+    function showImage(index) {
+      currentIndex = (index + allImages.length) % allImages.length;
+      const item = allImages[currentIndex];
+      lightboxImg.src = item.src;
+      lightboxImg.alt = item.alt;
+      lightboxCounter.textContent = (currentIndex + 1) + " / " + allImages.length;
+    }
+
+    function openLightbox(index) {
+      showImage(index);
+      lightbox.classList.add("open");
+      lightbox.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+    }
     function closeLightbox() {
       lightbox.classList.remove("open");
       lightbox.setAttribute("aria-hidden", "true");
       document.body.style.overflow = "";
     }
+
+    galleryWrap.querySelectorAll("img").forEach((img, i) => {
+      img.addEventListener("click", () => openLightbox(i));
+    });
+    extraWrap.querySelectorAll("img").forEach((img, i) => {
+      img.addEventListener("click", () => openLightbox(i + 3));
+    });
+
+    prevBtn.addEventListener("click", () => showImage(currentIndex - 1));
+    nextBtn.addEventListener("click", () => showImage(currentIndex + 1));
     document.getElementById("lightbox-close").addEventListener("click", closeLightbox);
     lightbox.addEventListener("click", (e) => { if (e.target === lightbox) closeLightbox(); });
-    document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeLightbox(); });
+    document.addEventListener("keydown", (e) => {
+      if (!lightbox.classList.contains("open")) return;
+      if (e.key === "Escape") closeLightbox();
+      if (e.key === "ArrowLeft") showImage(currentIndex - 1);
+      if (e.key === "ArrowRight") showImage(currentIndex + 1);
+    });
   })();
 </script>
 </body>
