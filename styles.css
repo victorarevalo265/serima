@@ -13,7 +13,8 @@
    único motivo gráfico recurrente.
    ========================================================= */
 
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap');
+/* Las fuentes ya no se cargan con @import (bloquea el render en cascada);
+   se cargan desde <link> en el <head> de cada página, con preconnect. */
 
 :root {
   --basalt: #191512;
@@ -35,10 +36,15 @@
   --gutter: clamp(20px, 5vw, 64px);
   --space-lg: clamp(72px, 10vw, 132px);
   --space-md: clamp(40px, 6vw, 72px);
+
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --dur-fast: 150ms;
+  --dur-base: 220ms;
 }
 
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; scroll-padding-top: 96px; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after {
@@ -99,7 +105,24 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 .contour {
   position: absolute;
   pointer-events: none;
-  opacity: 0.5;
+  z-index: 0;
+  height: auto;
+}
+.contour-line { fill: none; stroke: currentColor; stroke-width: 1.2; }
+.contour--hero {
+  right: -30px; bottom: -20px; width: min(46vw, 420px);
+  color: var(--stone); opacity: 0.1;
+}
+.contour--page {
+  right: -20px; top: -16px; width: min(38vw, 340px);
+  color: var(--amber); opacity: 0.14; transform: scaleX(-1);
+}
+.contour--footer {
+  left: -20px; top: -10px; width: min(32vw, 300px);
+  color: var(--stone); opacity: 0.05;
+}
+@media (max-width: 680px) {
+  .contour { display: none; }
 }
 
 /* =========================================================
@@ -117,10 +140,13 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   border-radius: 3px;
   border: 1px solid transparent;
   cursor: pointer;
-  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
+  transition: background var(--dur-base) var(--ease-out), color var(--dur-base) var(--ease-out),
+    border-color var(--dur-base) var(--ease-out), transform var(--dur-fast) var(--ease-out);
 }
+.btn:active { transform: scale(0.97); }
 .btn-primary { background: var(--amber); color: var(--basalt); }
 .btn-primary:hover { background: var(--amber-deep); color: var(--stone); transform: translateY(-1px); }
+.btn-primary:active { transform: scale(0.97); }
 .btn-outline { background: transparent; color: var(--basalt); border-color: var(--basalt); }
 .btn-outline:hover { background: var(--basalt); color: var(--stone); }
 .btn-outline-light { background: transparent; color: var(--stone); border-color: rgba(244,239,230,0.5); }
@@ -135,7 +161,10 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   background: rgba(244, 239, 230, 0.92);
   backdrop-filter: saturate(160%) blur(10px);
   border-bottom: 1px solid var(--line);
+  box-shadow: 0 0 0 rgba(25,21,18,0);
+  transition: box-shadow var(--dur-base) var(--ease-out);
 }
+.site-header.scrolled { box-shadow: 0 8px 24px rgba(25,21,18,0.08); }
 .site-header .container {
   display: flex; align-items: center; justify-content: space-between;
   padding-top: 16px; padding-bottom: 16px;
@@ -148,12 +177,12 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 .main-nav a {
   text-decoration: none; font-size: 1rem; font-weight: 500;
   color: var(--basalt); opacity: 0.68; position: relative;
-  transition: opacity 0.2s ease;
+  transition: opacity var(--dur-base) ease;
 }
 .main-nav a::after {
   content: ""; position: absolute; left: 0; right: 0; bottom: -6px;
   height: 2px; background: var(--amber);
-  transform: scaleX(0); transform-origin: left; transition: transform 0.25s ease;
+  transform: scaleX(0); transform-origin: left; transition: transform var(--dur-base) var(--ease-out);
 }
 .main-nav a:hover { opacity: 1; }
 .main-nav a:hover::after { transform: scaleX(1); }
@@ -181,8 +210,18 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   padding-bottom: clamp(56px, 8vw, 92px);
 }
 .page-hero .container { position: relative; z-index: 2; }
-.page-hero h1 { color: var(--stone); }
-.page-hero p { color: var(--stone); opacity: 0.78; max-width: 56ch; }
+.page-hero h1 {
+  color: var(--stone);
+  clip-path: inset(0 0 100% 0);
+  animation: reveal-up 0.9s var(--ease-out) 0.1s forwards;
+}
+.page-hero p:not(.page-hero-tag) {
+  color: var(--stone); opacity: 0; max-width: 56ch;
+  animation: fade-in 0.7s ease 0.45s forwards;
+}
+@media (prefers-reduced-motion: reduce) {
+  .page-hero h1, .page-hero p:not(.page-hero-tag) { animation: none; opacity: 1; clip-path: none; }
+}
 .page-hero-tag { font-weight: 600; color: var(--amber); margin-bottom: 16px; font-size: 1rem; }
 
 /* =========================================================
@@ -198,6 +237,8 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   display: grid;
   grid-template-columns: 1fr 0.92fr;
   min-height: min(88vh, 780px);
+  position: relative;
+  z-index: 1;
 }
 .hero-copy {
   display: flex;
@@ -374,12 +415,14 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 .project-card {
   text-decoration: none; color: inherit; display: block;
   background: var(--card); border: 1px solid var(--line); border-radius: 4px; overflow: hidden;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: transform var(--dur-base) var(--ease-out), box-shadow var(--dur-base) var(--ease-out);
 }
-.project-card:hover { transform: translateY(-4px); box-shadow: 0 14px 30px rgba(25,21,18,0.12); }
+@media (hover: hover) and (pointer: fine) {
+  .project-card:hover { transform: translateY(-4px); box-shadow: 0 14px 30px rgba(25,21,18,0.12); }
+  .project-card:hover .thumb img { transform: scale(1.05); }
+}
 .project-card .thumb { aspect-ratio: 4/3; overflow: hidden; background: var(--stone-deep); position: relative; }
-.project-card .thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
-.project-card:hover .thumb img { transform: scale(1.05); }
+.project-card .thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s var(--ease-out); }
 .project-card .tag {
   position: absolute; top: 12px; left: 12px; background: var(--amber); color: var(--basalt);
   font-weight: 600; font-size: 0.82rem; padding: 5px 12px; border-radius: 20px;
@@ -408,7 +451,20 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 .spec-table .row span:first-child { font-weight: 600; color: var(--amber-deep); font-size: 0.95rem; }
 .spec-table .row span:last-child { font-size: 0.97rem; }
 
+/* Resto de fotos del proyecto (más allá de las 3 destacadas) */
+.gallery-more-label { margin-top: var(--space-md); font-size: 1rem; font-weight: 600; color: var(--clay); }
+.gallery-extra {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 10px; margin-top: 18px;
+}
+.gallery-extra img {
+  width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: 4px; cursor: zoom-in;
+  transition: transform 0.3s ease;
+}
+.gallery-extra img:hover { transform: scale(1.03); }
+
 .related-projects { margin-top: var(--space-lg); }
+.related-projects .projects-grid { margin-top: 40px; }
 
 /* Visor de imagen ampliada */
 .lightbox {
@@ -420,6 +476,26 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 .lightbox-close {
   position: absolute; top: 20px; right: 24px; background: none; border: none;
   color: var(--stone); font-size: 2rem; cursor: pointer; line-height: 1;
+}
+.lightbox-nav {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  width: 46px; height: 46px; border-radius: 50%;
+  background: rgba(244,239,230,0.1); border: 1px solid rgba(244,239,230,0.35);
+  color: var(--stone); font-size: 1.4rem; line-height: 1; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.2s ease;
+}
+.lightbox-nav:hover { background: rgba(244,239,230,0.22); }
+.lightbox-prev { left: 18px; }
+.lightbox-next { right: 18px; }
+.lightbox-counter {
+  position: absolute; bottom: 22px; left: 50%; transform: translateX(-50%);
+  color: var(--stone); opacity: 0.68; font-size: 0.85rem; font-weight: 600; letter-spacing: 0.02em;
+}
+@media (max-width: 680px) {
+  .lightbox-nav { width: 38px; height: 38px; font-size: 1.1rem; }
+  .lightbox-prev { left: 6px; }
+  .lightbox-next { right: 6px; }
 }
 
 /* =========================================================
@@ -441,9 +517,11 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 .contact-channel {
   display: flex; align-items: flex-start; gap: 16px; padding: 22px; border: 1px solid var(--line);
   background: var(--card); border-radius: 4px; text-decoration: none; color: inherit;
-  transition: border-color 0.2s ease, transform 0.15s ease;
+  transition: border-color var(--dur-base) var(--ease-out), transform var(--dur-fast) var(--ease-out);
 }
-.contact-channel:hover { border-color: var(--amber); transform: translateY(-2px); }
+@media (hover: hover) and (pointer: fine) {
+  .contact-channel:hover { border-color: var(--amber); transform: translateY(-2px); }
+}
 .contact-channel .icon {
   width: 42px; height: 42px; border-radius: 50%; background: var(--stone-deep);
   display: flex; align-items: center; justify-content: center; flex-shrink: 0;
@@ -477,8 +555,8 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 /* =========================================================
    FOOTER
    ========================================================= */
-.site-footer { background: var(--basalt); color: var(--stone); padding-top: 60px; }
-.footer-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 40px; padding-bottom: 40px; }
+.site-footer { background: var(--basalt); color: var(--stone); padding-top: 60px; position: relative; overflow: hidden; }
+.footer-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 40px; padding-bottom: 40px; position: relative; z-index: 1; }
 .footer-brand { display: flex; flex-direction: column; gap: 14px; }
 .footer-logo-row { display: flex; align-items: center; gap: 14px; }
 .footer-logo-mark { display: inline-flex; background: var(--stone); padding: 8px 12px; border-radius: 6px; line-height: 0; }
@@ -492,7 +570,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 .footer-bottom {
   border-top: 1px solid rgba(244,239,230,0.14); padding: 20px 0;
   display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px;
-  font-size: 0.85rem; opacity: 0.55;
+  font-size: 0.85rem; opacity: 0.55; position: relative; z-index: 1;
 }
 .footer-bottom a { text-decoration: underline; opacity: 1; }
 
