@@ -1,5 +1,5 @@
 /* =========================================================
-   SERIMA — Grupo Técnico en Construcción Selma, S.A.
+   SERIMA — Grupo Técnico en Construcción SERIMA, S.A.
    Sistema visual
 
    Dirección: la empresa construye sobre terreno real —
@@ -141,7 +141,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   padding-top: 16px; padding-bottom: 16px;
 }
 .site-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--basalt); }
-.site-logo img { height: 40px; width: auto; border-radius: 2px; }
+.site-logo img { height: 52px; width: auto; border-radius: 3px; }
 .site-logo-text { font-family: var(--font-display); font-weight: 600; font-size: 1.4rem; }
 
 .main-nav ul { display: flex; gap: 34px; }
@@ -430,7 +430,8 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 .cta-band h2 { color: var(--stone); margin-bottom: 10px; font-size: clamp(1.8rem, 3.2vw, 2.5rem); }
 .cta-band p { color: var(--stone); opacity: 0.7; margin-bottom: 0; max-width: 48ch; }
 .cta-band-actions { display: flex; gap: 14px; flex-wrap: wrap; }
-.cta-band-logo { height: 40px; width: auto; border-radius: 3px; margin-bottom: 18px; }
+.cta-band-logo-mark { display: inline-flex; background: var(--stone); padding: 10px 14px; border-radius: 6px; line-height: 0; margin-bottom: 20px; }
+.cta-band-logo { height: 44px; width: auto; display: block; }
 
 /* =========================================================
    CONTACTO
@@ -479,8 +480,10 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 .site-footer { background: var(--basalt); color: var(--stone); padding-top: 60px; }
 .footer-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 40px; padding-bottom: 40px; }
 .footer-brand { display: flex; flex-direction: column; gap: 14px; }
+.footer-logo-row { display: flex; align-items: center; gap: 14px; }
+.footer-logo-mark { display: inline-flex; background: var(--stone); padding: 8px 12px; border-radius: 6px; line-height: 0; }
+.footer-brand img { height: 34px; width: auto; display: block; }
 .footer-brand .site-logo-text { font-size: 1.35rem; color: var(--stone); }
-.footer-brand img { height: 36px; }
 .footer-brand p { font-size: 0.92rem; opacity: 0.62; margin: 0; max-width: 34ch; }
 .footer-col h4 { font-size: 1rem; color: var(--stone); margin-bottom: 16px; }
 .footer-col ul { display: grid; gap: 10px; }
