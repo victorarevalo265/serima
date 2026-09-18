@@ -8,7 +8,19 @@
 <title>Proyectos | SERIMA — Puentes, taludes y obra vial en Guatemala</title>
 <meta name="description" content="Proyectos ejecutados por SERIMA: puentes, estabilización de taludes y obra vial en distintos puntos de Guatemala.">
 <link rel="canonical" href="https://serimagt.com/proyectos.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="SERIMA">
+<meta property="og:title" content="Proyectos | SERIMA">
+<meta property="og:description" content="Proyectos ejecutados por SERIMA: puentes, estabilización de taludes y obra vial en distintos puntos de Guatemala.">
+<meta property="og:url" content="https://serimagt.com/proyectos.html">
+<meta property="og:image" content="https://serimagt.com/recursos/LOGO%20SERIMA.jpeg">
+<meta property="og:locale" content="es_GT">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="recursos/LOGO SERIMA.jpeg">
+<meta name="theme-color" content="#191512">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -53,10 +65,10 @@
       <div class="projects-toolbar">
         <p class="eyebrow" style="margin:0;">Filtrar por categoría</p>
         <div class="filter-bar" id="filter-bar" role="group" aria-label="Filtrar proyectos por categoría">
-          <button type="button" class="filter-btn active" data-filter="todos">Todos</button>
-          <button type="button" class="filter-btn" data-filter="puentes">Puentes</button>
-          <button type="button" class="filter-btn" data-filter="taludes">Taludes</button>
-          <button type="button" class="filter-btn" data-filter="vial">Obra vial</button>
+          <button type="button" class="filter-btn active" data-filter="todos" aria-pressed="true">Todos</button>
+          <button type="button" class="filter-btn" data-filter="puentes" aria-pressed="false">Puentes</button>
+          <button type="button" class="filter-btn" data-filter="taludes" aria-pressed="false">Taludes</button>
+          <button type="button" class="filter-btn" data-filter="vial" aria-pressed="false">Obra vial</button>
         </div>
       </div>
       <div class="projects-grid" id="projects-grid"></div>
@@ -145,8 +157,12 @@
     filterBar.addEventListener("click", (e) => {
       const btn = e.target.closest(".filter-btn");
       if (!btn) return;
-      filterBar.querySelectorAll(".filter-btn").forEach((b) => b.classList.remove("active"));
+      filterBar.querySelectorAll(".filter-btn").forEach((b) => {
+        b.classList.remove("active");
+        b.setAttribute("aria-pressed", "false");
+      });
       btn.classList.add("active");
+      btn.setAttribute("aria-pressed", "true");
       const cat = btn.dataset.filter;
       document.querySelectorAll(".project-card").forEach((card) => {
         card.hidden = cat !== "todos" && card.dataset.category !== cat;
